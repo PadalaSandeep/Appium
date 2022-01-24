@@ -1,35 +1,29 @@
 package com.appiumTests;
 
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import util.driver.DriverFactory;
 
+import java.net.MalformedURLException;
 import java.net.URL;
+
+import static util.PropertyFileReader.getProperty;
+import static util.driver.DriverHolder.getDriver;
+import static util.driver.DriverHolder.setDriver;
 
 public class BaseTest {
 
-    public static WebDriver createChromeAndroidDriver(String browserVersion,
-                                               String deviceName, URL appiumServerUrl) {
-        // Resolve driver and get its path
-        WebDriverManager wdm = WebDriverManager.chromedriver()
-                .browserVersion(browserVersion);
-        wdm.setup();
-        String chromedriverPath = wdm.getDownloadedDriverPath();
+    @BeforeMethod
+    public void before() throws MalformedURLException {
+        //setDriver(DriverFactory.createChromeAndroidDriver("91.0.4472.19","Pixel_5_API_31_arm64-v8a",new URL("http://127.0.0.1:4723/wd/hub")));
+        setDriver(DriverFactory.createAndroidChromeDriver());
+        getDriver().get(getProperty("application_url"));
+    }
 
-        // Create WebDriver instance using the driver path
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("browserName", "chrome");
-        capabilities.setCapability("version", browserVersion);
-        capabilities.setCapability("deviceName", deviceName);
-        capabilities.setCapability("platformName", "android");
-        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
-        capabilities.setCapability("chromedriverExecutable", chromedriverPath);
-        capabilities.setCapability("w3c", false);
-
-        return new AndroidDriver<WebElement>(appiumServerUrl, capabilities);
+    @AfterMethod
+    public void after() {
+        if (getDriver() != null) {
+            getDriver().quit();
+        }
     }
 }

@@ -25,3 +25,6 @@ hs_err_pid*
 #target & idea
 .idea
 target/
+allure-results/
+src/.DS_Store
+allure-report/
