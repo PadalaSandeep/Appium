@@ -15,8 +15,10 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class DriverFactory {
+    private static WebDriver driver;
 
     public static WebDriver getNewDriverDesktopInstance(String browserName) {
         switch (browserName.toLowerCase()) {
@@ -67,12 +69,15 @@ public class DriverFactory {
     }
 
     public static WebDriver createAndroidChromeDriver() throws MalformedURLException {
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_5_API_31_arm64-v8a");
         capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
         capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, "Chrome");
-
-        return new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 300);
+        driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        return driver;
     }
 }

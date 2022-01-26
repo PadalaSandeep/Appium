@@ -1,7 +1,9 @@
 package pages;
 
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage{
 
@@ -9,10 +11,11 @@ public class HomePage extends BasePage{
         super(driver);
     }
 
-    private final By menu = By.className("svg-inline icon-bars");
+    @FindBy(xpath = "//button[@class='icon-button topbar-menu-button-avatar-button']//c3-icon//*[name()='svg']")
+    WebElement search;
 
-    public void clickMenu(){
-        click(menu);
+    public void clickSearch(){
+        search.click();
     }
 
 }

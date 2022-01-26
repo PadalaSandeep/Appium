@@ -4,28 +4,29 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.HomePage;
+import util.driver.DriverHolder;
 
-import static util.driver.DriverHolder.getDriver;
 
-@Epic("Browns Shoes")
-@Feature("Login")
+@Epic("Youtube")
+@Feature("Home Page")
 public class HomeTest extends BaseTest {
 
     private HomePage homePage;
 
     @BeforeMethod
     public void homeBeforeMethod() {
-        homePage = new HomePage(getDriver());
+        homePage = PageFactory.initElements(DriverHolder.getDriver(), HomePage.class);
     }
 
-    @Test(description = "Verify that a valid user can login to the application")
-    @Description("Verify that a valid user can login to the application")
-    @Story("As a user I should be able to login to the application")
-    public void testValidLogin() throws InterruptedException {
-        homePage.clickMenu();
+    @Test(description = "Verify that user can click search on homepage")
+    @Description("Verify that user can click search on homepage")
+    @Story("As a user I should be able to click search on homepage")
+    public void searchHomePage() throws InterruptedException {
+        homePage.clickSearch();
         Thread.sleep(5000);
     }
 }
