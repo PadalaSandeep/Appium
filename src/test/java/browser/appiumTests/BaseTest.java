@@ -1,4 +1,4 @@
-package com.appiumTests;
+package browser.appiumTests;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

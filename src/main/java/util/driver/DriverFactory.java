@@ -80,4 +80,18 @@ public class DriverFactory {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         return driver;
     }
+
+    public static WebDriver createAndroidAppDriver(String appName) throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android");
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_5_API_31_arm64-v8a");
+        capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "UiAutomator2");
+        capabilities.setCapability("appPackage", "com.google.android.calculator");
+        capabilities.setCapability("appActivity", "com.android.calculator2.Calculator");
+
+        capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 300);
+        driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        return driver;
+    }
 }

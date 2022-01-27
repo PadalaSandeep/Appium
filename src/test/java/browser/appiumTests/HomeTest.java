@@ -1,4 +1,4 @@
-package com.appiumTests;
+package browser.appiumTests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;

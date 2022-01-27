@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Automation Test Suite" verbose="1"  parallel="classes" thread-count="2">
+<suite name="Automation Test Suite" verbose="1"  parallel="classes" thread-count="1">
     <listeners>
         <listener class-name="util.AllureReportListener"/>
     </listeners>
     <test name="Regression Test">
         <classes>
-            <class name="com.appiumTests.HomeTest" />
+            <class name="browser.appiumTests.HomeTest" />
+            <class name="app.appiumTests.CalculatorTest"></class>
         </classes>
     </test>
 </suite>
