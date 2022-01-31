@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Automation Test Suite" verbose="1" thread-count="1">
+<suite name="Automation Test Suite" verbose="1">
     <listeners>
         <listener class-name="util.AllureReportListener"/>
     </listeners>
